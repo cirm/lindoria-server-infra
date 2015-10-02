@@ -1,3 +1,6 @@
+
+# Passwords and usernames - don't commit :)
+/docker/db/pgConf.env
 # Logs
 logs
 *.log
