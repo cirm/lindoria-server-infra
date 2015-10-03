@@ -9,9 +9,9 @@ echo ""
 echo "******EXECUTING WEB_USERS SCRIPT******"
 
 gosu postgres psql -h localhost \
-                   -p 5432 \
+                   -p $POSTGRES_PORT \
                    -U postgres  \
-                   -d lindoriadb \
+                   -d $POSTGRES_DB \
                    -a \
                    -f /docker-entrypoint-initdb.d/web_users.sql
 
