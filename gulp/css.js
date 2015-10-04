@@ -5,10 +5,10 @@
     , rename    = require('gulp-rename')
     , stylus    = require('gulp-stylus')
     , minifyCSS = require('gulp-minify-css')
-    , gConf     = require('./gulpConfig')
-    , styl      = gConf.paths.sources.stylus
-    , cssDest   = gConf.paths.destinations.css
-    , temp      = gConf.paths.destinations.temp;
+    , config     = require('./gulpConfig')
+    , styl      = config.paths.sources.stylus
+    , cssDest   = config.paths.destinations.css
+    , temp      = config.paths.destinations.temp;
 
   gulp.task('stylus', ['clean.temp'], function () {
     return gulp.src(styl)

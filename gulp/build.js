@@ -1,36 +1,40 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    var gulp = require('gulp')
-        , config = require('./gulpConfig')
-        , templateSrc = config.paths.sources.templates
-        , tempDir = config.paths.destinations.temp
-        , buildDir = config.paths.destinations.build
-        , serverSrc = config.paths.folders.server
-        , install = require('gulp-install')
-        , jade = require('gulp-jade')
-        , templateCache = require('gulp-angular-templatecache');
+  var gulp          = require('gulp')
+    , config        = require('./gulpConfig')
+    , templateSrc   = config.paths.sources.templates
+    , templateDest  = config.paths.destinations.angular
+    , buildDir      = config.paths.destinations.build
+    , serverSrc     = config.paths.sources.js
+    , angularRepo   = config.paths.repos.web
+    , install       = require('gulp-install')
+    , jade          = require('gulp-jade')
+    , rename        = require('gulp-rename')
+    , templateCache = require('gulp-angular-templatecache');
 
-    gulp.task('templates', function () {
-        gulp.src(templateSrc)
-            .pipe(jade())
-            .pipe(gulp.dest(tempDir))
-    });
+  gulp.task('templates', ['clean.templates'], function () {
+    return gulp.src(templateSrc)
+      .pipe(jade())
+      .pipe(templateCache())
+      .pipe(rename('templates.min.js'))
+      .pipe(gulp.dest(templateDest))
+  });
 
-    gulp.task('templateCache', ['templates'], function (){
-       return gulp.src(tempDir)
-           .pipe(templateCache())
-           .pipe(gulp.dest(buildDir))
-    });
+  gulp.task('buildServer', function () {
+    return gulp.src(serverSrc)
+      .pipe(gulp.dest(buildDir))
+  });
 
-    gulp.task('buildServer', function() {
-        return gulp.src(serverSrc)
-            .pipe(gulp.dest(buildDir))
-    });
+  gulp.task('serverDeps', ['buildServer'], function () {
+    return gulp.src(buildDir + '/package.json')
+      .pipe(install())
+  });
+  gulp.task('angularDeps', function () {
+    return gulp.src(angularRepo + 'bower.json')
+      .pipe(install())
+  });
 
-    gulp.task('serverDeps', function() {
-        return gulp.src(buildDir + 'js/package.json')
-            .pipe(install())
-    })
+  gulp.task('devBuild', ['clean.build', 'serverDeps', 'scripts', 'angularDeps', 'cssMin'])
 
 })();
