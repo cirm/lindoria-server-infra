@@ -16,7 +16,7 @@ web:
   ports:
    - '8080:8080'
   volumes:
-   - .:/lindoria
+   - ./build:/lindoria
   command: npm start
   environment:
    - NODE_ENV=staging

@@ -7,6 +7,7 @@
     , templateDest  = config.paths.destinations.angular
     , buildDir      = config.paths.destinations.build
     , serverSrc     = config.paths.sources.js
+    , serverRepo    = config.paths.repos.server
     , angularRepo   = config.paths.repos.web
     , install       = require('gulp-install')
     , jade          = require('gulp-jade')
@@ -22,7 +23,9 @@
   });
 
   gulp.task('buildServer', function () {
-    return gulp.src(serverSrc)
+    return gulp.src(serverSrc, {
+      base: serverRepo + 'src/js/'
+    })
       .pipe(gulp.dest(buildDir))
   });
 
