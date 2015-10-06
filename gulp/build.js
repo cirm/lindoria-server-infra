@@ -22,11 +22,14 @@
       .pipe(gulp.dest(templateDest))
   });
 
-  gulp.task('buildServer', function () {
-    return gulp.src(serverSrc, {
-      base: serverRepo + 'src/js/'
-    })
+  gulp.task('buildServer', ['copySsl'], function () {
+    return gulp.src(serverSrc)
       .pipe(gulp.dest(buildDir))
+  });
+
+  gulp.task('copySsl', function () {
+    return gulp.src('./ssl/*')
+      .pipe(gulp.dest(buildDir + '/ssl/'))
   });
 
   gulp.task('serverDeps', ['buildServer'], function () {

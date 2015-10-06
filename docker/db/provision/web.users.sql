@@ -1,7 +1,7 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users;
-DROP SCHEMA IF EXISTS web;
+DROP TABLE IF EXISTS web.users;
+DROP SCHEMA IF EXISTS web CASCADE;
 
 CREATE SCHEMA web AUTHORIZATION geegomoonshine;
 
@@ -49,7 +49,7 @@ i_roles
 
 $BODY$
 BEGIN
-INSERT INTO web_users (
+INSERT INTO web.users (
     usr_display,
     username,
     salt,
@@ -62,7 +62,7 @@ INSERT INTO web_users (
     i_hashed_pwd,
     i_roles);
 RETURN ( SELECT row_to_json(t) FROM (
-    SELECT username, usr_display FROM web_users where username=i_username) t);
+    SELECT username, usr_display FROM web.users where username=i_username) t);
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -88,11 +88,11 @@ Update the specified username. The user must be active. The username cannot be c
 */
 BEGIN
     UPDATE web.users
-       SET usr_display          = COALESCE(update_user.i_usr_display, web_users.usr_display),
-           salt                 = COALESCE(update_user.i_salt, web_users.salt),
-           hashed_pwd           = COALESCE(update_user.i_hashed_pwd, web_users.hashed_pwd),
+       SET usr_display          = COALESCE(update_user.i_usr_display, web.users.usr_display),
+           salt                 = COALESCE(update_user.i_salt, web.users.salt),
+           hashed_pwd           = COALESCE(update_user.i_hashed_pwd, web.users.hashed_pwd),
            updated_at           = NOW()
-     WHERE web_users.username   = update_user.i_username;
+     WHERE web.users.username   = update_user.i_username;
     RETURN FOUND;
 END;
 $BODY$
@@ -107,12 +107,12 @@ CREATE OR REPLACE FUNCTION web.log_visit(
     ───────────
      t
 Log the visit for the specified username. At this point, that just means that
-`web_users.visited_at` gets set to the current time.
+`web.users.visited_at` gets set to the current time.
 */
 BEGIN
     UPDATE web.users
        SET visited_at     = NOW()
-     WHERE web_users.username = $1;
+     WHERE web.users.username = $1;
     RETURN FOUND;
 END;
 $BODY$
