@@ -9,13 +9,13 @@
       },
       sources     : {
         templates: '../lindoria-web-ui/src/js/**/*.jade',
-        js       : ['../lindoria-server-app/src/js/*', '../lindoria-server-app/src/js/**/*'],
+        js       : ['../lindoria-server-app/src/js/*.js', '../lindoria-server-app/src/js/**/*.js'],
         stylus : '../lindoria-web-ui/src/css/site.styl',
         angular  : ['../lindoria-web-ui/src/js/app.module.js',
                     '../lindoria-web-ui/src/js/*.js',
                     '../lindoria-web-ui/src/js/**/*.js'],
         watch    : function () {
-          return this.js.concat(this.angular, this.tests);
+          return this.js.concat(this.angular);
         }
 
       },

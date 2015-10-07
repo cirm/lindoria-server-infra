@@ -2,17 +2,15 @@
   'use strict';
 
   var gulp    = require('gulp')
-    , gConf   = require('./gulpConfig')
+    , gConf   = require('./gulp.config')
     , js      = gConf.paths.sources.js
-    , tests   = gConf.paths.sources.tests
-    , styl    = gConf.paths.sources.stylus
+    , css    = gConf.paths.sources.stylus
     , angular = gConf.paths.sources.angular;
 
   gulp.task('watch', function () {
-    gulp.watch(js, ['lint', 'test']);
-    gulp.watch(styl, ['cssMin']);
-    gulp.watch(angular, ['scripts']);
-    gulp.watch(tests, ['test']);
+    gulp.watch(js, ['lint', 'node.update']);
+    gulp.watch(css, ['css.min']);
+    gulp.watch(angular, ['lint', 'angular.update']);
   });
 
 }());

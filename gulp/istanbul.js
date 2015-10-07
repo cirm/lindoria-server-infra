@@ -5,7 +5,7 @@
   var gulp     = require('gulp')
     , istanbul = require('gulp-istanbul')
     , mocha    = require('gulp-mocha')
-    , gConf    = require('./gulpConfig')
+    , gConf    = require('./gulp.config')
     , coverage = gConf.paths.destinations.coverage
     , tests    = gConf.paths.sources.tests
     , js       = gConf.paths.sources.js;

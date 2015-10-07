@@ -3,18 +3,17 @@
 
   var gulp        = require('gulp')
     , clean       = require('del')
-    , config      = require('./gulpConfig')
-    , coverage    = config.paths.destinations.coverage
+    , config      = require('./gulp.config')
     , angularDest = config.paths.destinations.angular
     , cssDest     = config.paths.destinations.css
     , build       = config.paths.destinations.build
     , temp        = config.paths.destinations.temp;
 
-  gulp.task('clean.min.angular', function () {
+  gulp.task('clean.angular.min', function () {
     clean([angularDest + 'all.min.js']);
   });
 
-  gulp.task('clean.min.css', function () {
+  gulp.task('clean.css.min', function () {
     clean([cssDest]);
   });
 
@@ -29,7 +28,11 @@
     clean([angularDest + 'templates.min.js'])
   });
 
-  gulp.task('clean.all', ['clean.coverage', 'clean.temp', 'clean.min.css', 'clean.min.js'], function () {
+  gulp.task('clean.node', function () {
+    clean(['build/**', '!build/ssl/**', '!build/ssl/**', '!build', '!build/public/**', '!build/node_modules/**']);
+  });
+
+  gulp.task('clean.all', ['clean.temp', 'clean.build'], function () {
 
   });
 

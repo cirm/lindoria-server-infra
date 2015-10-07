@@ -22,7 +22,7 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
 && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
 && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
 
-&& npm install -g npm@"$NPM_VERSION" gulp \
+&& npm install -g npm@"$NPM_VERSION" nodemon \
 && npm cache clear
 
 EXPOSE 8000
