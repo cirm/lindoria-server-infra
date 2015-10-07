@@ -17,7 +17,7 @@
   gulp.task('templates', ['clean.templates'], function () {
     return gulp.src(templateSrc)
       .pipe(jade())
-      .pipe(templateCache())
+      .pipe(templateCache({module:'app'}))
       .pipe(rename('templates.min.js'))
       .pipe(gulp.dest(templateDest))
   });
