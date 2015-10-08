@@ -5,8 +5,8 @@
     , jshint = require('gulp-jshint')
     , stylish = require('jshint-stylish')
     , config  = require('./gulp.config')
-    , jshintconf = require('../')
-    , jshintConfig = jshintconf.jshintrc
+    , JSONpackage = require('../jshintconf')
+    , jshintConfig = JSONpackage.config
     , watch  = config.paths.sources.watch();
 
   jshintConfig.lookup = false;
