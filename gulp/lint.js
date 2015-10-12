@@ -11,18 +11,18 @@
     , nodeSrc      = config.paths.sources.js
     , nodeRules    = JSONpackage.nodejs;
 
-  gulp.task('lint.angular', function () {
+  gulp.task('angular.lint', function () {
     return gulp.src(angularSrc)
       .pipe(jshint(angularRules))
       .pipe(jshint.reporter(stylish));
   });
 
-  gulp.task('lint.node', function () {
+  gulp.task('node.lint', function () {
     return gulp.src(nodeSrc)
       .pipe(jshint(nodeRules))
       .pipe(jshint.reporter(stylish));
   });
 
-  gulp.task('lint', ['lint.node', 'lint.angular']);
+  gulp.task('lint', ['node.lint', 'angular.lint']);
 
 }());

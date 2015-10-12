@@ -10,7 +10,7 @@
   gulp.task('watch', function () {
     gulp.watch(js, ['node.lint', 'node.update']);
     gulp.watch(css, ['css.min']);
-    gulp.watch(angular, ['lint', 'angular.update']);
+    gulp.watch(angular, ['angular.lint', 'angular.update']);
   });
 
 }());
