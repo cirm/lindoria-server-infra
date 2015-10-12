@@ -8,7 +8,7 @@
     , angular = gConf.paths.sources.angular;
 
   gulp.task('watch', function () {
-    gulp.watch(js, ['lint', 'node.update']);
+    gulp.watch(js, ['node.lint', 'node.update']);
     gulp.watch(css, ['css.min']);
     gulp.watch(angular, ['lint', 'angular.update']);
   });
