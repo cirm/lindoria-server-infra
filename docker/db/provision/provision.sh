@@ -13,7 +13,7 @@ gosu postgres psql -h localhost \
                    -U postgres  \
                    -d $POSTGRES_DB \
                    -a \
-                   -f /docker-entrypoint-initdb.d/web.users.sql
+                   -f /docker-entrypoint-initdb.d/schemaChangeLog.sql
 
 echo ""
 echo "******WEB_USERS SCRIPT DONE******"
