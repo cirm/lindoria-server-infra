@@ -6,7 +6,7 @@ db:
   volumes:
    - ./docker/db/data:/var/lib/postgresql/data
   env_file:
-   - ./docker/db/pgConf.env
+   - ./docker/conf.env
 
 web:
   build: ./docker/server
@@ -18,7 +18,7 @@ web:
   volumes:
    - ./build:/lindoria
   command: npm start
-  environment:
-   - NODE_ENV=staging
+  env_file:
+   - ./docker/conf.env
 
 

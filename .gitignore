@@ -1,6 +1,5 @@
-
 # Passwords and usernames - don't commit :)
-/docker/db/pgConf.env
+
 # Logs
 logs
 *.log
@@ -33,3 +32,5 @@ node_modules
 /build
 /deploy
 /temp
+
+conf.env
